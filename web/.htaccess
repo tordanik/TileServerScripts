@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tiles/([nsew])/([0-9]+)/([0-9]+)/([0-9]+).png$ meta/get_tile.php?dir=$1&z=$2&x=$3&y=$4 [L,QSA]

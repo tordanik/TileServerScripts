@@ -1,0 +1,6 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^h([0-9]+)/tilenumber/([0-9]+)/([0-9]+)/([0-9]+).png$ tilenumber.php?z=$2&x=$3&y=$4&h=$1 [L,QSA]
+RewriteRule ^h([0-9]+)/timestamp/([0-9]+)/([0-9]+)/([0-9]+).png$ timestamp.php?z=$2&x=$3&y=$4&h=$1 [L,QSA]
