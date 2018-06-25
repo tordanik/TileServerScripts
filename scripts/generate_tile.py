@@ -282,20 +282,12 @@ def getAustriaData():
     restart_rendering();
 
 
-""" Pull osm2world data and compile them """
-def bzrPull():
-    os.chdir(OSM2WORLD)
-    print("pulling osm2world sources and compiling them:")
-    os.system("bzr pull")
-    os.system("ant")
-
-
 """
  main
 """
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'h', ['help', 'fetch-austria', 'fetch-switzerland', 'fetch-germany', 'fetch-all', 'bzr-pull'])
+        opts, args = getopt.getopt(sys.argv[1:], 'h', ['help', 'fetch-austria', 'fetch-switzerland', 'fetch-germany', 'fetch-all'])
     except getopt.GetoptError, err:
         sys.stderr.write(str(err) + '\n')
         sys.exit(1)
@@ -317,9 +309,6 @@ def main():
             getAustriaData();
             getSwitzerlandData();
             getGermanyData();
-            sys.exit();
-        elif o == '--bzr-pull':
-            bzrPull();
             sys.exit();
             
     #actual tile code...
