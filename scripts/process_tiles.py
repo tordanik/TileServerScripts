@@ -2,11 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os, math, getopt, sys, re, random
+from config_vars import *
 
-STOP_FILE = '/tmp/stop_tilegen'
-INPUT_DIR = '/home/osmuser/input/tiles/'
-FINISHED_DIR = '/home/osmuser/input/old/'
-MAX_THREADS = 3
 
 def main():
 
