@@ -23,3 +23,4 @@ ZOOM = 13
 
 REMAINING_TILES = '/tmp/tiles_todo'
 WEBSITE_ORDERS = '/tmp/orders'
+POLY_DIRECTORY = '/tmp'

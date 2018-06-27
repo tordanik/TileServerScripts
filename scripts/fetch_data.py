@@ -41,8 +41,8 @@ def getGermanyData():
 
     dir = os.getcwd()
     os.chdir(MAPSPLIT);
-    command = './mapsplit -v -t -b=0.1 -c -f=%d -s=100000000,25000000,450000 -p=/scratch/peda/germany_south.poly -d=/scratch/peda/input/lastchange_germany_south.txt %s %s'
-    command = command % (NR_FILES, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
+    command = './mapsplit -v -t -b=0.1 -c -f=%d -s=100000000,25000000,450000 -p=%s/germany_south.poly -d=/scratch/peda/input/lastchange_germany_south.txt %s %s'
+    command = command % (NR_FILES, POLY_DIRECTORY, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
     print ('Splitting south germany into tiles via:\n' + command)
     os.system(command)
 
@@ -65,8 +65,8 @@ def getGermanyData():
 
     dir = os.getcwd()
     os.chdir(MAPSPLIT);
-    command = './mapsplit -v -t -b=0.1 -c -f=%d -s=160000000,40000000,450000 -p=/scratch/peda/germany_middle.poly -d=/scratch/peda/input/lastchange_germany_middle.txt %s %s'
-    command = command % (NR_FILES, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
+    command = './mapsplit -v -t -b=0.1 -c -f=%d -s=160000000,40000000,450000 -p=%s/germany_middle.poly -d=/scratch/peda/input/lastchange_germany_middle.txt %s %s'
+    command = command % (NR_FILES, POLY_DIRECTORY, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
     print ('Splitting middle germany into tiles via:\n' + command)
     os.system(command)
 
@@ -89,8 +89,8 @@ def getGermanyData():
 
     dir = os.getcwd()
     os.chdir(MAPSPLIT);
-    command = './mapsplit -v -t -b=0.1 -c -f=%d -s=100000000,20000000,450000  -p=/scratch/peda/germany_north.poly -d=/scratch/peda/input/lastchange_germany_north.txt %s %s'
-    command = command % (NR_FILES, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
+    command = './mapsplit -v -t -b=0.1 -c -f=%d -s=100000000,20000000,450000  -p=%s/germany_north.poly -d=/scratch/peda/input/lastchange_germany_north.txt %s %s'
+    command = command % (NR_FILES, POLY_DIRECTORY, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
     print ('Splitting north germany into tiles via:\n' + command)
     os.system(command)
 
@@ -122,8 +122,8 @@ def getSwitzerlandData():
     
     dir = os.getcwd()
     os.chdir(MAPSPLIT);
-    command = './mapsplit -v -t -b=0.1 -c -f=%d -p=/scratch/peda/switzerland.poly -d=/scratch/peda/input/lastchange_switzerland.txt %s %s'
-    command = command % (NR_FILES, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
+    command = './mapsplit -v -t -b=0.1 -c -f=%d --size=120000000,20000000,5000000 -p=%s/switzerland.poly -d=/scratch/peda/input/lastchange_switzerland.txt %s %s'
+    command = command % (NR_FILES, POLY_DIRECTORY, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
     print ('Splitting switzerland into tiles via:\n' + command)
     os.system(command)
 
@@ -139,7 +139,7 @@ def getSwitzerlandData():
     restart_rendering();
 
 
-""" Fetch data for Germany from Geofabrik """
+""" Fetch data for Austria from Geofabrik """
 def getAustriaData():
     stop_rendering();
 
@@ -151,8 +151,8 @@ def getAustriaData():
     
     dir = os.getcwd()
     os.chdir(MAPSPLIT);
-    command = './mapsplit -v -t -b=0.1 -c -f=%d -p=/scratch/peda/austria.poly -d=/scratch/peda/input/lastchange_austria.txt %s %s'
-    command = command % (NR_FILES, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
+    command = './mapsplit -v -t -b=0.1 -c -f=%d --size=120000000,20000000,5000000 -p=%s/austria.poly -d=/scratch/peda/input/lastchange_austria.txt %s %s'
+    command = command % (NR_FILES, POLY_DIRECTORY, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
     print ('Splitting austria into tiles via:\n' + command)
     os.system(command)
 
