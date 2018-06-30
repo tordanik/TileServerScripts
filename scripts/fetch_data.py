@@ -149,9 +149,14 @@ def getAustriaData():
     getData("austria", "http://download.geofabrik.de/europe/austria-latest.osm.pbf", "--size=120000000,20000000,5000000");
 
 
+""" Fetch data for the DACH region (Germany, Austria, Switzerland) Geofabrik """
+def getDACHData():
+    getData("dach", "https://download.geofabrik.de/europe/dach-latest.osm.pbf", "--size=600000000,100000000,250000000");
+
+
 """ Print usage informations """
 def usage():
-    print("generate_tile.py [-h|--help] [--fetch-[austria|switzerland|germany|all]]");
+    print("generate_tile.py [-h|--help] [--fetch-[austria|switzerland|germany|dach|all]]");
 
 
 """
@@ -159,7 +164,7 @@ def usage():
 """
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'h', ['help', 'fetch-austria', 'fetch-switzerland', 'fetch-germany', 'fetch-all'])
+        opts, args = getopt.getopt(sys.argv[1:], 'h', ['help', 'fetch-austria', 'fetch-switzerland', 'fetch-germany', 'fetch-dach', 'fetch-all'])
     except getopt.GetoptError, err:
         sys.stderr.write(str(err) + '\n')
         sys.exit(1)
@@ -176,6 +181,9 @@ def main():
             sys.exit();
         elif o == '--fetch-germany':
             getGermanyData();
+            sys.exit();
+        elif o == '--fetch-dach':
+            getDACHData();
             sys.exit();
         elif o == '--fetch-all':
             getAustriaData();
