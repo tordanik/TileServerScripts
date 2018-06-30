@@ -21,6 +21,35 @@ def restart_rendering():
     os.system(command);
 
 
+""" downloads a data file via wget and calls mapsplit to produce .osm.pbf input tiles from it """
+def getData(filenameBase, url, mapsplitParams):
+    stop_rendering();
+
+    osmdump = '%s.osm.pbf' % filenameBase
+    os.chdir(TILE_OUTPUT + '/dl/');
+    command = 'wget -O %s %s' % (osmdump, url)
+    print ("Fetching " + filenameBase + " data via:\n" + command);
+    os.system(command)
+    
+    dir = os.getcwd()
+    os.chdir(MAPSPLIT);
+    command = './mapsplit -v -t -b=0.1 -c -f=%d %s -p=%s/%s.poly -d=/scratch/peda/input/lastchange_%s.txt %s %s'
+    command = command % (NR_FILES, mapsplitParams, POLY_DIRECTORY, filenameBase, filenameBase, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
+    print ('Splitting ' + osmdump + ' into tiles via:\n' + command)
+    os.system(command)
+
+    # and finally copy let's copy the files back to our working directory..
+    command = 'mv ' + TILE_OUTPUT + '/dl/tiles_* ' + TILE_OUTPUT;
+    print ('Copy tile-files to working dir via:\n' + command)
+    os.system(command)
+
+    command = 'rm ' + osmdump;
+    print ('Remove tilefile via:\n' + command)
+    os.system(command);
+
+    restart_rendering();
+
+
 """ Fetch data for Germany from Geofabrik """
 def getGermanyData():
     stop_rendering();
@@ -112,60 +141,12 @@ def getGermanyData():
 
 """ Fetch data for Switzerland from Geofabrik """
 def getSwitzerlandData():
-    stop_rendering();
-
-    osmdump = 'switzerland.osm.pbf'
-    os.chdir(TILE_OUTPUT + '/dl/');
-    command = 'wget -O %s "http://download.geofabrik.de/europe/switzerland-latest.osm.pbf"' % osmdump
-    print ("Fetching switzerland data from geofabrik via:\n" + command);
-    os.system(command)
-    
-    dir = os.getcwd()
-    os.chdir(MAPSPLIT);
-    command = './mapsplit -v -t -b=0.1 -c -f=%d --size=120000000,20000000,5000000 -p=%s/switzerland.poly -d=/scratch/peda/input/lastchange_switzerland.txt %s %s'
-    command = command % (NR_FILES, POLY_DIRECTORY, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
-    print ('Splitting switzerland into tiles via:\n' + command)
-    os.system(command)
-
-    # and finally copy let's copy the files back to our working directory..
-    command = 'mv ' + TILE_OUTPUT + '/dl/tiles_* ' + TILE_OUTPUT;
-    print ('Copy tile-files to working dir via:\n' + command)
-    os.system(command)
-
-    command = 'rm ' + osmdump;
-    print ('Remove tilefile via:\n' + command)
-    os.system(command);
-
-    restart_rendering();
+    getData("switzerland", "http://download.geofabrik.de/europe/switzerland-latest.osm.pbf", "--size=120000000,20000000,5000000");
 
 
 """ Fetch data for Austria from Geofabrik """
 def getAustriaData():
-    stop_rendering();
-
-    osmdump = 'austria.osm.pbf'
-    os.chdir(TILE_OUTPUT + '/dl/');
-    command = 'wget -O %s "http://download.geofabrik.de/europe/austria-latest.osm.pbf"' % osmdump
-    print ("Fetching austria data from geofabrik via:\n" + command);
-    os.system(command)
-    
-    dir = os.getcwd()
-    os.chdir(MAPSPLIT);
-    command = './mapsplit -v -t -b=0.1 -c -f=%d --size=120000000,20000000,5000000 -p=%s/austria.poly -d=/scratch/peda/input/lastchange_austria.txt %s %s'
-    command = command % (NR_FILES, POLY_DIRECTORY, dir + '/' + osmdump, TILE_OUTPUT + '/dl/tiles_z13_');
-    print ('Splitting austria into tiles via:\n' + command)
-    os.system(command)
-
-    # and finally copy let's copy the files back to our working directory..
-    command = 'mv ' + TILE_OUTPUT + '/dl/tiles_* ' + TILE_OUTPUT;
-    print ('Copy tile-files to working dir via:\n' + command)
-    os.system(command)
-
-    command = 'rm ' + osmdump;
-    print ('Remove tilefile via:\n' + command)
-    os.system(command);
-    
-    restart_rendering();
+    getData("austria", "http://download.geofabrik.de/europe/austria-latest.osm.pbf", "--size=120000000,20000000,5000000");
 
 
 """ Print usage informations """
